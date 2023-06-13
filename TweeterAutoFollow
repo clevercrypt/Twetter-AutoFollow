@@ -1,0 +1,30 @@
+// ==UserScript==
+// @name         Twitter Auto Follow
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Automatically presses the "Follow" button on a specific Twitter tweet page (intent).
+// @author       Your Name
+// @match        https://twitter.com/intent/follow?screen_name=*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Function to click the "Like" button
+    function clickFollowButton() {
+        const FollowButton = document.querySelector('[data-testid="confirmationSheetConfirm"]');
+        if (FollowButton) {
+            FollowButton.click();
+        } else {
+            setTimeout(clickFollowButton, 1000); // Retry after 1 second
+        }
+    }
+    // Function to close the tab
+    function closeTab() {
+        window.close();
+    }
+
+    // Start waiting for the "Like" button
+    setTimeout(clickFollowButton, 1000); // Start after 1 second
+})();
